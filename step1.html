@@ -1,0 +1,91 @@
+<!DOCTYPE "html">
+<html>
+<head>
+	<link type="text/css" rel="stylesheet" href="fonts.css">
+	<link type="text/css" rel="stylesheet" href="style.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=11">
+    <script src="/scripts/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript" src="jquery.browser.min.js"></script>
+	<script type="text/javascript" src="rangeslider.min.js"></script>
+	<script type="text/javascript" src="custom.js"></script>
+    <script src="//code.angularjs.org/1.3.0-rc.1/angular.min.js"></script>
+    <script src="//code.angularjs.org/1.3.0-rc.1/angular-route.min.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?key=&sensor=false&extension=.js&libraries=places">
+    </script>
+</head>
+<body ng-app="MainApp">
+	<header>
+	</header>
+	<main class="col mvl">
+		<section id="address">
+			<form id="sLoc" ng-controller="secondController">
+					<label  for="address" class="grow"><span class="green eC">1</span> Check your address to see if we're active in your area.</label>
+					<div class="row">
+						<input  class="grow" type="text" ng-address-autocomplete ng-model="fullAddress" name="address" placeholder="Enter your address">
+						<input id="validateAddress" type="button" value="Validate my address" ng-click="validateAddress()"/>
+					</div>
+                    <span ng-show="isValid === true" class="green block success width large"><b>Your address is qualified for solar!</b></span>
+			</form>
+		</section>
+		<section id="savings">
+             <div id="throbber" class="throbber"></div>
+                <form id="savingsCalculator">
+                    <div class="row">
+                        <div class="col jb mhlr">
+                            <div class="stepTwo">
+                                <label for="rate"><span class="green eC">2</span> Your Current Utility Rate</label>
+                                <p>We've set the average utility rate for your area.* If you know it's different, please adjust the slider. Providing us with an accurate utility rate helps us estimate your monthly savings.</p>
+                            </div>
+                            <div class="ranger">
+                                <div id="oneR" style="width:500px">
+                                    <div data-range-slider
+                                         data-floor="0.10"
+                                         data-ceiling="0.40"
+                                         data-step="0.01"
+                                         data-precision="2"
+                                         data-buffer="true"
+                                         data-highlight="left"
+                                         data-ng-model="items[0].value"></div>
+                                    <output id="oro"><span class="prefix">$</span><span class="value">{{items[0].value}}</span><span class="suffix">/kWh</span></output>
+                                    <div class="row jb phvl">
+                                        <span class="tl small">$0.10/kWh</span>
+                                        <span class="tr small">$0.40/kWh</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col jb mhll">
+                            <div id="stepThree" class="stepThree">
+                                <label for="bill"><span class="green eC">3</span> Your Average Monthly Electric Bill</label>
+                                <p>Adjust the slider to reflect your average monthly electric bill (use the total amount you pay).</p>
+                            </div>
+                            <div class="ranger">
+                                <div id="twoR" style="width:500px; margin-left:-5%">
+                                    <div data-range-slider
+                                         data-floor="0"
+                                         data-ceiling="400"
+                                         data-step="5"
+                                         data-highlight="left"
+                                         data-ng-model="items[1].value"></div>
+                                    <output id="tro"><span class="suffix">$</span><span class="value">{{items[1].value}}</span></output>
+                                    <div class="row jb phvl">
+                                        <span class="tl small">$0</span>
+                                        <span class="tr small">$400</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="calc" class="tc">
+                        <input type="submit" class="blue" value="Show Me What I Could Save" onclick="window.location='#/step5';" />
+                    </div>
+                </form>
+                <h4 class="small">*Your utility rate is a combination of supply and delivery charges</h4>
+</section>
+      	</main>
+	<footer>
+	</footer>
+</body>
+
+
+</html>
